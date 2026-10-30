@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#e8efe5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="My Collection">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>My Collection</title>
+<style>
+:root{--mint:#e8efe5;--sage:#78927a;--sage-dark:#526b57;--cream:#faf7ed;--beige:#eee5d4;--pink:#e8c5c1;--ink:#425447;--muted:#879487;--white:#fffefa;--shadow:0 5px 18px #536b5718}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:86px}
+header{padding:20px 18px 12px;display:flex;align-items:center;justify-content:space-between;max-width:760px;margin:auto}
+.brand{display:flex;gap:10px;align-items:center}.logo{width:46px;height:46px;border-radius:15px;background:var(--mint);display:grid;place-items:center;font-size:25px;box-shadow:var(--shadow)}h1{font-family:Georgia,serif;font-size:25px;margin:0;color:var(--sage-dark)}.tag{font-size:11px;color:var(--muted);margin-top:3px}
+main{max-width:760px;margin:auto;padding:0 16px 22px}.welcome{background:linear-gradient(130deg,#e8efe5,#f4eadb);border-radius:22px;padding:19px;margin:8px 0 14px;box-shadow:var(--shadow)}.welcome strong{font-family:Georgia,serif;font-size:21px}.welcome p{margin:6px 0 0;color:#758575;font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:17px}.stat{background:var(--white);border-radius:16px;padding:12px 8px;text-align:center;box-shadow:var(--shadow)}.stat b{font-size:21px;color:var(--sage-dark);display:block}.stat span{font-size:11px;color:var(--muted)}
+.progress{height:9px;background:#dce5d9;border-radius:20px;overflow:hidden;margin-top:10px}.progress i{display:block;height:100%;background:var(--sage);border-radius:20px;width:0}
+h2{font-size:17px;margin:19px 0 11px;color:var(--sage-dark)}.cats{display:flex;gap:8px;overflow:auto;padding:2px 0 9px}.chip{white-space:nowrap;border:1px solid #d9e2d6;background:var(--white);color:var(--ink);border-radius:30px;padding:9px 13px;font-size:12px}.chip.active{background:var(--sage);color:white;border-color:var(--sage)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.card{background:var(--white);border-radius:17px;overflow:hidden;box-shadow:var(--shadow);position:relative}.photo{width:100%;height:135px;object-fit:cover;background:var(--mint);display:grid;place-items:center;color:var(--sage);font-size:36px}.photo.placeholder{display:flex;align-items:center;justify-content:center}.cardbody{padding:10px}.cardbody b{font-size:13px;display:block;overflow-wrap:anywhere}.cardbody small{font-size:11px;color:var(--muted)}.actions{display:flex;justify-content:space-between;align-items:center;margin-top:8px}.tiny{border:0;background:#f1f3ec;border-radius:20px;padding:7px 9px;color:var(--sage-dark);font-size:11px}.heart{border:0;background:transparent;font-size:20px;color:#c68e91;padding:2px 5px}.done{opacity:.72}.done .cardbody b{text-decoration:line-through}
+button,input,select,textarea{font:inherit}.primary{border:0;background:var(--sage);color:white;border-radius:14px;padding:12px 15px;font-weight:600}.secondary{border:1px solid #d5dfd1;background:var(--white);color:var(--sage-dark);border-radius:14px;padding:10px 13px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.toolbar button{flex:1}
+nav{position:fixed;bottom:0;left:0;right:0;background:#fffefaf2;backdrop-filter:blur(12px);border-top:1px solid #e8e8dc;display:flex;justify-content:center;gap:5px;padding:8px 8px calc(8px + env(safe-area-inset-bottom));z-index:5}nav button{border:0;background:transparent;color:var(--muted);padding:7px 10px;border-radius:13px;font-size:11px;min-width:62px}nav button.active{background:var(--mint);color:var(--sage-dark)}nav span{display:block;font-size:20px;margin-bottom:2px}
+dialog{border:0;border-radius:22px;padding:20px;width:min(92%,440px);background:var(--cream);color:var(--ink);box-shadow:0 15px 60px #26352b55}dialog::backdrop{background:#26352b66}dialog h2{margin-top:0}label{display:block;font-size:12px;color:var(--sage-dark);margin:12px 0 5px}input[type=text],textarea,select{width:100%;border:1px solid #d8e1d4;border-radius:12px;background:white;padding:12px;color:var(--ink)}input[type=file]{width:100%;font-size:12px;margin-top:7px}textarea{min-height:65px;resize:vertical}.formrow{display:flex;gap:8px;margin-top:15px}.formrow>*{flex:1}
+.empty{text-align:center;background:#fffefa;border-radius:18px;padding:26px;color:var(--muted);font-size:13px}.hidden{display:none!important}.sectionhead{display:flex;justify-content:space-between;align-items:center}.sectionhead h2{margin-bottom:8px}
+footer{font-size:11px;color:var(--muted);text-align:center;margin:25px 0 5px}
+</style>
+</head>
+<body>
+<header><div class="brand"><div class="logo">📔</div><div><h1>My Collection</h1><div class="tag">collect little moments ♡</div></div></div><button class="secondary" id="settingsBtn" aria-label="Einstellungen">⚙️</button></header>
+<main>
+<section id="home">
+ <div class="welcome"><strong>Bereit für neue Entdeckungen?</strong><p>Jede kleine Entdeckung verdient einen Platz in deinem Album. 🌿</p></div>
+ <div class="stats"><div class="stat"><b id="countAll">0</b><span>Einträge</span></div><div class="stat"><b id="countDone">0</b><span>Entdeckt</span></div><div class="stat"><b id="countFav">0</b><span>Favoriten</span></div></div>
+ <div class="stat" style="text-align:left"><div style="display:flex;justify-content:space-between"><span>Dein Sammelfortschritt</span><b id="percent" style="font-size:14px">0%</b></div><div class="progress"><i id="bar"></i></div></div>
+ <div class="sectionhead"><h2>Deine Sammlung</h2><button class="secondary" id="addHome">＋ Hinzufügen</button></div>
+ <div class="cats" id="homeCats"></div><div class="grid" id="homeGrid"></div>
+</section>
+<section id="collection" class="hidden">
+ <div class="sectionhead"><h2>Meine Sammlung</h2><button class="primary" id="addCollection">＋ Neu</button></div>
+ <div class="cats" id="collectionCats"></div><div class="grid" id="collectionGrid"></div>
+</section>
+<section id="favorites" class="hidden"><h2>♡ Favoriten</h2><div class="grid" id="favGrid"></div></section>
+<section id="profile" class="hidden">
+ <div class="welcome"><strong>Dein Sammelprofil 🌱</strong><p>Du bist auf Entdeckungsreise!</p></div>
+ <div class="stats"><div class="stat"><b id="pAll">0</b><span>Gesamt</span></div><div class="stat"><b id="pDone">0</b><span>Gefunden</span></div><div class="stat"><b id="pCats">0</b><span>Kategorien</span></div></div>
+ <h2>Deine Daten</h2><p style="font-size:13px;color:var(--muted)">Deine Sammlung wird lokal in diesem Browser auf deinem iPhone gespeichert. Exportiere regelmäßig ein Backup.</p>
+ <div class="toolbar"><button class="primary" id="exportBtn">⬇ Backup exportieren</button><button class="secondary" id="importBtn">⬆ Backup importieren</button></div><input id="importFile" type="file" accept="application/json" class="hidden">
+ <button class="secondary" id="installHelp" style="width:100%">Zum Home-Bildschirm hinzufügen</button>
+</section>
+</main>
+<nav><button class="active" data-tab="home"><span>⌂</span>Start</button><button data-tab="collection"><span>▦</span>Sammlung</button><button id="navAdd"><span style="font-size:25px">＋</span>Neu</button><button data-tab="favorites"><span>♡</span>Favoriten</button><button data-tab="profile"><span>☻</span>Profil</button></nav>
+<dialog id="itemDialog"><form id="itemForm"><h2>Neue Entdeckung 🌷</h2><label for="itemName">Titel *</label><input id="itemName" type="text" placeholder="z. B. Ein grünes Auto" required maxlength="90"><label for="itemCat">Kategorie</label><select id="itemCat"></select><label for="itemNote">Notiz (optional)</label><textarea id="itemNote" placeholder="Wo hast du es entdeckt?"></textarea><label for="itemPhoto">Foto aufnehmen oder aus Galerie wählen</label><input id="itemPhoto" type="file" accept="image/*" capture="environment"><div class="formrow"><button type="button" class="secondary" id="cancelDialog">Abbrechen</button><button class="primary" type="submit">Speichern ♡</button></div></form></dialog>
+<dialog id="catDialog"><form id="catForm"><h2>Neue Kategorie</h2><label for="catName">Name</label><input id="catName" type="text" placeholder="z. B. Bücher" required maxlength="40"><div class="formrow"><button type="button" class="secondary" id="cancelCat">Abbrechen</button><button class="primary">Erstellen</button></div></form></dialog>
+<dialog id="settingsDialog"><h2>Einstellungen</h2><p style="font-size:13px">My Collection speichert Fotos und Einträge lokal in deinem Browser. Bitte lösche die Safari-Websitedaten nicht, wenn du deine Sammlung behalten möchtest. Nutze regelmäßig ein Backup.</p><button class="primary" id="settingsExport" style="width:100%">Backup exportieren</button><div class="formrow"><button class="secondary" id="closeSettings">Schließen</button></div></dialog>
+<script>
+const defaults=["🚗 Autos & Kennzeichen","🐾 Tiere","🌿 Natur","🏙️ Orte & Gebäude","🌈 Farben & Muster","✨ Zufallsfunde"];
+const DB="myCollectionDB", STORE="entries";
+let db, entries=[], categories=defaults, activeCat=defaults[0], tab="home";
+const req=indexedDB.open(DB,1);
+req.onupgradeneeded=()=>{let d=req.result;if(!d.objectStoreNames.contains(STORE))d.createObjectStore(STORE,{keyPath:"id",autoIncrement:true});};
+req.onsuccess=async()=>{db=req.result;await load();render();};
+req.onerror=()=>alert("Speicher konnte nicht geöffnet werden. Bitte Safari neu laden.");
+function tx(mode="readonly"){return db.transaction(STORE,mode).objectStore(STORE)}
+function all(){return new Promise((res,rej)=>{let r=tx().getAll();r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)})}
+async function load(){entries=await all();let saved=localStorage.getItem("mcCategories");if(saved)categories=[...new Set([...defaults,...JSON.parse(saved)])];}
+function save(e){return new Promise((res,rej)=>{let r=tx("readwrite").put(e);r.onsuccess=()=>res();r.onerror=()=>rej(r.error)})}
+function del(id){return new Promise((res,rej)=>{let r=tx("readwrite").delete(id);r.onsuccess=()=>res();r.onerror=()=>rej(r.error)})}
+function esc(s){return String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function render(){
+ const done=entries.filter(e=>e.done).length, fav=entries.filter(e=>e.fav).length, pct=entries.length?Math.round(done/entries.length*100):0;
+ ["countAll","pAll"].forEach(id=>document.getElementById(id).textContent=entries.length);
+ ["countDone","pDone"].forEach(id=>document.getElementById(id).textContent=done);
+ document.getElementById("countFav").textContent=fav;document.getElementById("pCats").textContent=categories.length;
+ document.getElementById("percent").textContent=pct+"%";document.getElementById("bar").style.width=pct+"%";
+ renderCats("homeCats");renderCats("collectionCats");renderGrid("homeGrid",entries.filter(e=>e.category===activeCat));renderGrid("collectionGrid",entries.filter(e=>e.category===activeCat));renderGrid("favGrid",entries.filter(e=>e.fav));
+}
+function renderCats(id){let el=document.getElementById(id);el.innerHTML="";categories.forEach(c=>{let b=document.createElement("button");b.className="chip "+(c===activeCat?"active":"");b.textContent=c;b.onclick=()=>{activeCat=c;render()};el.append(b)});let add=document.createElement("button");add.className="chip";add.textContent="＋ Kategorie";add.onclick=()=>document.getElementById("catDialog").showModal();el.append(add)}
+function renderGrid(id,list){let el=document.getElementById(id);el.innerHTML="";if(!list.length){el.innerHTML='<div class="empty" style="grid-column:1/-1">Hier ist noch Platz für deine Entdeckungen. ♡</div>';return}
+ list.forEach(e=>{let card=document.createElement("article");card.className="card "+(e.done?"done":"");let img=e.photo?`<img class="photo" src="${e.photo}" alt="">`:'<div class="photo placeholder">📔</div>';card.innerHTML=`${img}<div class="cardbody"><b>${esc(e.name)}</b><small>${esc(e.category)}</small>${e.note?`<p style="font-size:11px;color:#879487">${esc(e.note)}</p>`:""}<div class="actions"><button class="tiny toggle">${e.done?"✓ Gefunden":"○ Abhaken"}</button><button class="heart">${e.fav?"♥":"♡"}</button><button class="tiny remove">Löschen</button></div></div>`;card.querySelector(".toggle").onclick=async()=>{e.done=!e.done;await save(e);render()};card.querySelector(".heart").onclick=async()=>{e.fav=!e.fav;await save(e);render()};card.querySelector(".remove").onclick=async()=>{if(confirm("Diesen Eintrag wirklich löschen?")){await del(e.id);await load();render()}};el.append(card)})
+}
+function openAdd(){document.getElementById("itemCat").innerHTML=categories.map(c=>`<option>${esc(c)}</option>`).join("");document.getElementById("itemCat").value=activeCat;document.getElementById("itemDialog").showModal()}
+document.getElementById("itemForm").onsubmit=async ev=>{ev.preventDefault();let file=document.getElementById("itemPhoto").files[0],photo="";if(file){if(file.size>8*1024*1024){alert("Das Foto ist größer als 8 MB. Bitte wähle ein kleineres Bild.");return}photo=await new Promise((res,rej)=>{let r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(file)})}
+ await save({name:document.getElementById("itemName").value.trim(),category:document.getElementById("itemCat").value,note:document.getElementById("itemNote").value.trim(),photo,done:false,fav:false,created:new Date().toISOString()});document.getElementById("itemForm").reset();document.getElementById("itemDialog").close();await load();render()};
+document.getElementById("catForm").onsubmit=ev=>{ev.preventDefault();let c=document.getElementById("catName").value.trim();if(c&&!categories.includes(c)){categories.push(c);localStorage.setItem("mcCategories",JSON.stringify(categories.filter(x=>!defaults.includes(x))));activeCat=c}document.getElementById("catForm").reset();document.getElementById("catDialog").close();render()};
+document.getElementById("cancelDialog").onclick=()=>document.getElementById("itemDialog").close();document.getElementById("cancelCat").onclick=()=>document.getElementById("catDialog").close();
+document.getElementById("addHome").onclick=openAdd;document.getElementById("addCollection").onclick=openAdd;document.getElementById("navAdd").onclick=openAdd;
+document.querySelectorAll("nav [data-tab]").forEach(b=>b.onclick=()=>{tab=b.dataset.tab;document.querySelectorAll("main section").forEach(s=>s.classList.toggle("hidden",s.id!==tab));document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("active",x===b));});
+document.getElementById("settingsBtn").onclick=()=>document.getElementById("settingsDialog").showModal();document.getElementById("closeSettings").onclick=()=>document.getElementById("settingsDialog").close();document.getElementById("settingsExport").onclick=exportData;document.getElementById("exportBtn").onclick=exportData;
+function exportData(){let data={app:"My Collection",version:1,categories,entries};let blob=new Blob([JSON.stringify(data)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="my-collection-backup.json";a.click();URL.revokeObjectURL(a.href)}
+document.getElementById("importBtn").onclick=()=>document.getElementById("importFile").click();
+document.getElementById("importFile").onchange=async ev=>{let f=ev.target.files[0];if(!f)return;try{let d=JSON.parse(await f.text());if(!Array.isArray(d.entries)||!Array.isArray(d.categories))throw 0;if(!confirm("Backup importieren? Bestehende Einträge werden ersetzt."))return;let t=db.transaction(STORE,"readwrite").objectStore(STORE);await new Promise((res,rej)=>{let r=t.clear();r.onsuccess=res;r.onerror=rej});for(let e of d.entries){delete e.id;await save(e)}categories=[...new Set([...defaults,...d.categories])];localStorage.setItem("mcCategories",JSON.stringify(categories.filter(x=>!defaults.includes(x))));await load();render();alert("Backup erfolgreich importiert!")}catch(e){alert("Diese Backup-Datei konnte nicht gelesen werden.")}ev.target.value=""};
+document.getElementById("installHelp").onclick=()=>alert("In Safari: unten auf Teilen tippen und dann „Zum Home-Bildschirm“ auswählen.");
+if("serviceWorker" in navigator && location.protocol.startsWith("http"))navigator.serviceWorker.register("./sw.js").catch(()=>{});
+</script>
+</body></html>
